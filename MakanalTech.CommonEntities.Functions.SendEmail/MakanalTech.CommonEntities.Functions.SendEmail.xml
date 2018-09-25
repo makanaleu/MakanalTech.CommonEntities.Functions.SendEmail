@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MakanalTech.CommonEntities.Functions.SendEmail</name>
+    </assembly>
+    <members>
+        <member name="T:MakanalTech.CommonEntities.Functions.SendEmail">
+            <summary>
+            Sends an e-mail message through SendGrid using a 
+            MakanalTech.CommonEntities.Core.EmailMessage.
+            </summary>
+        </member>
+        <member name="M:MakanalTech.CommonEntities.Functions.SendEmail.Send(MakanalTech.CommonEntities.Core.EmailMessage)">
+            <summary>
+            Abstracts the properties of an EmailMessage to build a 
+            SendGridMessage. The message is then sent using the required
+            environment variable `SENDGRID_API_KEY`.
+            </summary>
+            <param name="emailMessage">An e-mail message.</param>
+            <returns>The response received from the API call to SendGrid</returns>
+        </member>
+        <member name="M:MakanalTech.CommonEntities.Functions.SendEmail.DeserializeEmailMessage(System.IO.Stream)">
+            <summary>
+            Useful when loading an EmailMessage from Blob Storage or as a Blob
+            Trigger input.
+            </summary>
+            <param name="blobStream">Serialized EmailMessage as a Stream.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MakanalTech.CommonEntities.Functions.SendEmail.SerializeEmailMessage(MakanalTech.CommonEntities.Core.EmailMessage)">
+            <summary>
+            Serialize an EmailMessage as an XML string.
+            </summary>
+            <param name="emailMessage">An e-mail message.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
