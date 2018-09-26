@@ -16,6 +16,11 @@
             SendGridMessage. The message is then sent using the required
             environment variable `SENDGRID_API_KEY`.
             </summary>
+            <remarks>
+            The e-mail subject should be set in EmailMessage.About.Name. The 
+            plaintext content should be set in EmailMessage.About.Description.
+            If HTML content is included, it should be set in EmailMessage.Text.
+            </remarks>
             <param name="emailMessage">An e-mail message.</param>
             <returns>The response received from the API call to SendGrid</returns>
         </member>
@@ -33,6 +38,35 @@
             </summary>
             <param name="emailMessage">An e-mail message.</param>
             <returns></returns>
+        </member>
+        <member name="T:MakanalTech.CommonEntities.Functions.WriteEmail">
+            <summary>
+            Utilities for writing an EmailMessage including MailMerge and
+            SerializeEmailMessage.
+            </summary>
+        </member>
+        <member name="M:MakanalTech.CommonEntities.Functions.WriteEmail.MailMerge(MakanalTech.CommonEntities.Core.EmailMessage,MakanalTech.CommonEntities.Listify.Intangible.ItemList)">
+            <summary>
+            Merges a ItemList containing a list of values with an EmailMessage
+            template.
+            </summary>
+            <param name="emailTemplate">
+            A partially complete EmailMessage containing the plaintext content
+            and if desired the HTML content with interpolation expressions.
+            Other EmailMessage properties may also be pre-filled.
+            </param>
+            <param name="valueList">
+            A list of values to insert into the e-mail template. The ItemList
+            should contain only ListItems, using ListItem.Name as the item
+            key and ListItem.Description as the item value.
+            
+            If valueList contains recipient or sender values, they will override
+            the emailTemplate preset values.
+            
+            Values from valueList are replaced into the e-mail subject,
+            plaintext content and HTML content when matched to a `{Placeholder}`.
+            </param>
+            <returns>An EmailMessage containing the merged text.</returns>
         </member>
     </members>
 </doc>

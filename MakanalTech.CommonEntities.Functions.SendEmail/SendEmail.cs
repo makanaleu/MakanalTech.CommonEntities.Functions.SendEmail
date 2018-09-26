@@ -20,6 +20,11 @@ namespace MakanalTech.CommonEntities.Functions
         /// SendGridMessage. The message is then sent using the required
         /// environment variable `SENDGRID_API_KEY`.
         /// </summary>
+        /// <remarks>
+        /// The e-mail subject should be set in EmailMessage.About.Name. The 
+        /// plaintext content should be set in EmailMessage.About.Description.
+        /// If HTML content is included, it should be set in EmailMessage.Text.
+        /// </remarks>
         /// <param name="emailMessage">An e-mail message.</param>
         /// <returns>The response received from the API call to SendGrid</returns>
         public static async Task<Response> Send(EmailMessage emailMessage)
@@ -27,10 +32,10 @@ namespace MakanalTech.CommonEntities.Functions
             string apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
             SendGridClient client = new SendGridClient(apiKey);
 
-            string senderEmail = null;
+            string senderEmail; // required
             string senderName = null;
 
-            string recipientEmail = null;
+            string recipientEmail; // required
             string recipientName = null;
 
             // Set sender e-mail and name as an Organization (supersedes Person).
@@ -38,7 +43,7 @@ namespace MakanalTech.CommonEntities.Functions
             {
                 Organization senderOrg = emailMessage.Sender.AsOrganization;
                 senderEmail = senderOrg.Email.AsText;
-                senderName = senderOrg.Name.AsText;
+                senderName = senderOrg.Name?.AsText;
             }
             // Set sender e-mail and name as a Person.
             else if (emailMessage.Sender.AsPerson != null)
@@ -59,13 +64,19 @@ namespace MakanalTech.CommonEntities.Functions
                         + " " + senderPerson.FamilyName.AsText;
                 }
             }
+            else
+            {
+                throw new ApplicationException(
+                    "A sender Organization or Person is required."
+                );
+            }
 
             // Set recipient e-mail and name as an Organization (supersedes Person).
             if (emailMessage.ToRecipient.AsOrganization != null)
             {
                 Organization recipOrg = emailMessage.ToRecipient.AsOrganization;
                 recipientEmail = recipOrg.Email.AsText;
-                recipientName = recipOrg.Name.AsText;
+                recipientName = recipOrg.Name?.AsText;
             }
             // Set recipient e-mail and name as a Person.
             else if (emailMessage.ToRecipient.AsPerson != null)
@@ -86,14 +97,19 @@ namespace MakanalTech.CommonEntities.Functions
                         + " " + recipPerson.FamilyName.AsText;
                 }
             }
+            else
+            {
+                throw new ApplicationException(
+                    "A recipient Organization or Person is required."
+                );
+            }
 
-            // TODO Handle multipart/alternate e-mails.
             SendGridMessage sendGridMessage = new SendGridMessage()
             {
                 From = new EmailAddress(senderEmail, senderName),
-                Subject = emailMessage.About.Description.AsText,
-                PlainTextContent = emailMessage.Text.AsText,
-                HtmlContent = emailMessage.Text.AsText
+                Subject = emailMessage.About?.Name?.AsText,
+                PlainTextContent = emailMessage.About?.Description?.AsText,
+                HtmlContent = emailMessage.Text?.AsText
             };
 
             // TODO Add ccRecipient and bccRecipient.
