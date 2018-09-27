@@ -5,14 +5,14 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Kane McConnell</Authors>
     <Company>Makánal Technológia és Szoftver Fejlesztés Kft.</Company>
-    <Version>1.0.0-rc.4</Version>
+    <Version>1.0.0-rc.5</Version>
     <Description>Sends an e-mail message through SendGrid using a MakanalTech.CommonEntities.Core.EmailMessage. Can be incorporated into an Azure Function App to used with a QueueTrigger or BlobTrigger.</Description>
     <Copyright></Copyright>
     <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
     <RepositoryType>Git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
-    <AssemblyVersion>1.0.0.4</AssemblyVersion>
-    <FileVersion>1.0.0.4</FileVersion>
+    <AssemblyVersion>1.0.0.5</AssemblyVersion>
+    <FileVersion>1.0.0.5</FileVersion>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://makanal.visualstudio.com/_git/MakanalTech.CommonEntities.Functions.SendEmail</PackageProjectUrl>
     <RepositoryUrl>https://github.com/makanaleu/MakanalTech.CommonEntities.Functions.SendEmail</RepositoryUrl>
