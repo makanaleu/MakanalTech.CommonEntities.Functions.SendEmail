@@ -108,7 +108,7 @@ namespace MakanalTech.CommonEntities.Functions
             {
                 From = new EmailAddress(senderEmail, senderName),
                 Subject = emailMessage.About?.Name?.AsText,
-                PlainTextContent = emailMessage.About?.Description?.AsText,
+                PlainTextContent = emailMessage.About?.Description?.AsText ?? "",
                 HtmlContent = emailMessage.Text?.AsText
             };
 
