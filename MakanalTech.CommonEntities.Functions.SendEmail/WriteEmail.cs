@@ -38,21 +38,25 @@ namespace MakanalTech.CommonEntities.Functions
         {
             // Check if recipient e-mail is included in valueList.
             ListItemThingOrText toRecipientEmail = valueList.ItemListElements?
-                .Find(x => x.AsListItem.Item.Name.AsText == "ToRecipientEmail");
+                .Find(x => x.AsListItem?.Item?.Name?.AsText == "ToRecipientEmail")
+                ?? null;
 
             // Check if recipient name is included in valueList.
             ListItemThingOrText toRecipientName = valueList.ItemListElements?
-                .Find(x => x.AsListItem.Item.Name.AsText == "ToRecipientName");
+                .Find(x => x.AsListItem?.Item?.Name?.AsText == "ToRecipientName")
+                ?? null;
 
             // Check if sender e-mail is included in valueList.
             ListItemThingOrText senderEmail = valueList.ItemListElements?
-                .Find(x => x.AsListItem.Item.Name.AsText == "SenderEmail");
+                .Find(x => x.AsListItem?.Item?.Name?.AsText == "SenderEmail")
+                ?? null;
 
             // Check if sender name is included in valueList.
             ListItemThingOrText senderName = valueList.ItemListElements?
-                .Find(x => x.AsListItem.Item.Name.AsText == "SenderName");
+                .Find(x => x.AsListItem?.Item?.Name?.AsText == "SenderName")
+                ?? null;
 
-            
+
             if (toRecipientEmail != null || toRecipientName != null)
             {
                 // Set up ToRecipient object if not already in template.
